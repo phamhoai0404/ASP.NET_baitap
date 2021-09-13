@@ -9,9 +9,9 @@ namespace BaiTap1.Controllers
     public class ViDuController : Controller
     {
         // GET: ViDu
-        public String Index()
+        public ActionResult Index()
         {
-            return "ASP.NET đầu tiên của tôi"; 
+            return View();
         }
 
         public String Welcome()
