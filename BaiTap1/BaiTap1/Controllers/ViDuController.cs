@@ -28,6 +28,14 @@ namespace BaiTap1.Controllers
             return HttpUtility.HtmlEncode("Xin chào " + name + ", ID: " + ID);
         }
 
+        public ActionResult Welcome4(string name, int ID = 1)
+        {
+            ViewBag.Message = "Xin chào: " + name;
+            ViewBag.NumTime = ID;
+
+            return View();
+        }
+
 
     }
 }
