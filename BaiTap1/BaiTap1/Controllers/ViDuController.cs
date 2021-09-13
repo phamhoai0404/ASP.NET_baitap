@@ -14,6 +14,7 @@ namespace BaiTap1.Controllers
             return View();
         }
 
+
         public String Welcome()
         {
             return "Đây là Welcome nhá! ";
@@ -33,6 +34,11 @@ namespace BaiTap1.Controllers
             ViewBag.Message = "Xin chào: " + name;
             ViewBag.NumTime = ID;
 
+            return View();
+        }
+
+        public ActionResult ViewTest()
+        {
             return View();
         }
 
