@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @RenderSection("nhungJSCSSildeShow", required:false)
+
+</head>
+<body>
+
+    <img src="~/wwwroot/images/oranet_logo.jpg" />
+    <img src="~/wwwroot/images/oreilly_header.gif" />
+    <hr />
+    <ul>
+        <li><button>@Html.ActionLink("Trang chủ ", "Index", "Home")</button></li>
+        <li><button>@Html.ActionLink("Giới thiệu ", "About", "Home")</button></li>
+        <li><button>@Html.ActionLink("Liên hệ ", "Contact", "Home")</button></li>
+
+    </ul>
+
+    <div>
+        @* Đây là phần bắt buộc phải có ở trong mỗi cái view khi render ra đấy *@
+        @RenderSection("header", required: true)
+
+
+        @* Đây là phần không bắt buộc phải có trong mỗi view khi render ra đấy *@
+        @* Bây h ví dụ như phần này ở  trong Index thì cho có còn cái khác thì không cho *@
+        @RenderSection("gidoSildeShow", required:false)
+
+
+        @RenderBody()
+    </div>
+    <hr />
+    <h4>Copyright - 2021: Học lập trình web băng ASP.NET</h4>
+</body>
+</html>
