@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        *** Có hai kiểu là kiểu truyền là (form) và (query string)
+        *** Kiểu trên là form
+        *** Kiểu dưới sau đây là query string
+
+        <h1>Đăng ký</h1>
+        <form action="/Home/Register" method="post">
+            <div>Mã</div><input name="Id" />
+            <div>Họ tên</div><input name="Name" />
+            <div>Điểm</div><input name="Mark" />
+            <hr />
+            <input type="submit" value="Đăng ký" />
+        </form>
+
+        <br />
+
+
+        <input type="submit" value="Lưu" formaction="/Home/Save" />
+        <input type="submit" value="Mở" formaction="/Home/Open" />
+
+        @ViewBag.HanhDong
+        @ViewBag.ThongTin
+
+
+        <a href="/Home/Register?Id=15&Nam=Phạm&Mark=8.8">Dùng Query string</a>
+    </div>
+</body>
+</html>
