@@ -23,16 +23,19 @@
             <div>Điểm</div><input name="Mark" />
             <hr />
             <input type="submit" value="Đăng ký" />
+            <br />
+            <hr />
+            <input type="submit" value="Lưu" formaction="/Home/Save" />
+            <input type="submit" value="Mở" formaction="/Home/Open" />
         </form>
 
         <br />
 
 
-        <input type="submit" value="Lưu" formaction="/Home/Save" />
-        <input type="submit" value="Mở" formaction="/Home/Open" />
+        
 
-        @ViewBag.HanhDong
-        @ViewBag.ThongTin
+        <h1>Hành động: @ViewBag.HanhDong</h1> 
+        <h2>Thông tin: @ViewBag.ThongTin</h2> 
 
 
         <a href="/Home/Register?Id=15&Nam=Phạm&Mark=8.8">Dùng Query string</a>

@@ -71,7 +71,7 @@ namespace BaiTap7.Controllers
             System.IO.File.WriteAllLines(path, lines);
 
             ViewBag.HanhDong = "Đã ghi vào file !";
-
+            ViewBag.ThongTin = "Rỗng nhá !";
 
             //Trả về view Index
             return View("Index");
@@ -94,7 +94,7 @@ namespace BaiTap7.Controllers
 
             //Thông tin đọc được
             ViewBag.ThongTin = "Mã sinh viên: " + sv.Id + " - Tên SV: " + sv.Name + " - Điểm: " + sv.Mark;
-            ViewBag.HanhDong = "Đã đọctừ file!";
+            ViewBag.HanhDong = "Đã đọc từ file!";
 
 
             return View("Index", sv);

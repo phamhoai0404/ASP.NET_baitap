@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Upload file nhá </h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <p><img id="hienThiAnh" width="200" /></p>
+    <p><label for="loadFile" style="cursor:pointer; color:red;">Chọn file</label></p>
+    <p><input name="documentsss" type="file" id="loadFile" style="display:none;" onchange="eventLoadFile(event)"/></p>
+    <hr />
+
+    <input type="submit" value="Upload File" formaction="/UploadFile/Upload" />
+</form>
+<br />
+
+<p>@ViewBag.FileName</p>
+<p>@ViewBag.FielTypessss</p>
+<p>@ViewBag.FileSizessssss</p>
+
+
+<script>
+    var eventLoadFile = function (event) {
+        var imagessssssss = document.getElementById('hienThiAnh');
+        imagessssssss.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>
+
