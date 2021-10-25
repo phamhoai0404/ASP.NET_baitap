@@ -31,7 +31,7 @@ namespace BaiTap7.Controllers
 
             return View("Index");
 
-            return View();
+            
         }
     }
 }
