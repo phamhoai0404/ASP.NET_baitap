@@ -18,10 +18,6 @@ namespace BaiTap9.Controllers
         // GET: Member/Details/5
         public ActionResult Details(Member me)
         {
-            if(me.ImagePath == null)
-            {
-                
-            }
             return View(me);
         }
 
