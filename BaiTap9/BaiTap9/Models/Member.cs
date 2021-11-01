@@ -33,13 +33,22 @@ namespace BaiTap9.Models
         public DateTime Birthday { get; set; }
 
         [DisplayName("Giới tính")]
-        [UIHint("Boolean")]//Cái này cần chú ý đấy 
+        [Required(ErrorMessage ="Giới tính không được để trống")]
+        [UIHint("GioiTinh")]//Cái này cần chú ý đấy 
         public bool Gender { get; set; }
 
         [DisplayName("Địa chỉ")]
         public string Address { get; set; }
 
-        [DisplayName("Địa chỉ email"), DataType(DataType.EmailAddress)]
+        [DisplayName("Địa chỉ email")]
+        //Cách 1
+        //Cái này đúng này khi xóa đi nó rỗng thì nó sẽ không báo lỗi 
+        //[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Phải đúng định dạng email")]
+
+        //Cách 2
+        [EmailAddress(ErrorMessage = "Phải đúng định dạng email nhá")]
+
+        //Hai cách trên của email đều đúng
         public string Email { get; set; }
     }
 }

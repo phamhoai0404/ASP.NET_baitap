@@ -1,0 +1,15 @@
+﻿@model bool
+@{
+    string gendersss = "";
+    if (Model == true)
+    {
+        gendersss = "Nam";
+
+    }
+    else if (Model == false) { gendersss = "Nữ"; }
+    else { gendersss = "Không xác định"; }
+
+    <label> @gendersss </label>
+}
+
+
