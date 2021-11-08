@@ -1,0 +1,129 @@
+﻿@model BaiTap11_3.Models.SinhVien
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Sửa sinh viên - Phạm Thị Hoài</h2>
+
+
+@using (Html.BeginForm("Edit", "SinhViens", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>SinhVien</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaSV)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenSV, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenSV, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenSV, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DienThoai, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="col-md-10">
+                @{
+                    string ImagePath = "";
+                    if (Model.Anh != null) { ImagePath = "~/wwwroot/Images/" + Model.Anh; }
+                    else { ImagePath = "~/wwwroot/Images/no-image-news.png"; }
+                }
+                <img id="hienThiAnh" class="img-rounded" alt="Ảnh" width="180" height="200"
+                     src="@Url.Content(@ImagePath)" />
+                <p><label for="loadFile" style="cursor: pointer;">Chọn file ảnh</label></p>
+                <input name="ImageFile" id="loadFile" type="file" style="display: none;" onchange="eventLoadFile(event)" />
+                @Html.HiddenFor(model => model.Anh, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenDN, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenDN, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Khoa, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Khoa)
+                @Html.ValidationMessageFor(model => model.Khoa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    var eventLoadFile = function (event) {
+
+        var file = document.getElementById("loadFile").value;
+        var ext = file.substring(file.lastIndexOf('.') + 1);
+        if (ext == "") return true;
+        if (ext == "gif" || ext == "GIF" || ext == "PNG" || ext == "png" || ext == "jpg" || ext == "JPG" || ext == "bmp" || ext == "BMP") {
+            var imagessssssss = document.getElementById('hienThiAnh');
+            imagessssssss.src = URL.createObjectURL(event.target.files[0]);
+            return true;
+        }
+        else {
+            document.getElementById("loadFile").value = null;
+            alert("Chỉ upload file ảnh!");
+            fup.focus();
+            return false;
+        }
+    };
+</script>

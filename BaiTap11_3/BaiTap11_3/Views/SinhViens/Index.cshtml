@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BaiTap11_3.Models.SinhVien>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách sinh viên - Phạm Thị Hoài</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Khoa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @{
+                string ImagePath = "";
+                if (item.Anh != null) { ImagePath = "~/wwwroot/Images/" + item.Anh; }
+                else { ImagePath = "~/wwwroot/Images/no-image-news.png"; }
+            }
+            <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+            <br />
+
+            @Html.HiddenFor(modelItem => item.Anh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Khoa)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.MaSV.Trim() }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.MaSV.Trim() }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.MaSV.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

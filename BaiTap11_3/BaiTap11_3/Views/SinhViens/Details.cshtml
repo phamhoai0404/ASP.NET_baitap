@@ -1,0 +1,90 @@
+﻿@model BaiTap11_3.Models.SinhVien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết sinh viên - Phạm Thị Hoài</h2>
+
+<div>
+    <h4>SinhVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh)
+        </dt>
+
+        <dd>
+            @{
+                string ImagePath = "";
+                if (Model.Anh != null) { ImagePath = "~/wwwroot/Images/" + Model.Anh; }
+                else { ImagePath = "~/wwwroot/Images/no-image-news.png"; }
+            }
+            <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+            <br />
+
+            @Html.HiddenFor(model => model.Anh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Khoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Khoa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSV.Trim() }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>
