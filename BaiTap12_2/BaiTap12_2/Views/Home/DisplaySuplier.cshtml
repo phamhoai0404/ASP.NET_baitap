@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<BaiTap12_2.Models.Nha_CC>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "DisplaySuplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Danh sách nhà cung cấp</h2>
+
+
+<table class="table">
+    <tr>
+        <!-- Chú ý  Html.DisplayNameFor(model => model.Nha_CC.TenNCC) không được hiển thị ở trong IPagedList nên bắt buộc phải sử dụng chữ thường-->
+        <th>
+            Tên NCC
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenNCC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+       
+    </tr>
+}
+
+</table>
+<br/>
+<!-- Mấy cái thuộc tính PageCout và PageNumber là có sẵn trong thư viện của IPageList chỉ lấy ra dùng thôi-->
+Trang @(Model.PageCount <Model.PageNumber ? 0: Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("DisplaySuplier", new { page }))

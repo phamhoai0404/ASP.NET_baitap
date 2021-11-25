@@ -1,0 +1,71 @@
+﻿@model PagedList.IPagedList<BaiTap12_2.Models.Hang>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách hàng</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        <!-- Không phân biệt chữ hoa chữ thường hay sao ấy vì mình viết  là SearchString  vẫn được-->
+        Tìm mặt hàng theo tên: @Html.TextBox("searchString", ViewBag.CurrentFiter as string)
+        <input type="submit" value="Tìm" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Mã hàng
+        </th>
+        <th>
+            @Html.ActionLink("Tên hàng", "Index", new { sortOrder = ViewBag.SapTheoTen, currentFiter = ViewBag.CurrentFiter })
+        </th>
+        <th>
+            @Html.ActionLink("Giá", "Index", new { sortOrder = ViewBag.SapTheoGia, currentFiter = ViewBag.CurrentFiter })
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+            <td>
+                @{
+                    string ImagePath = "";
+                    if (item.HinhAnh != null) { ImagePath = "~/wwwroot/Images/" + item.HinhAnh; }
+                    else { ImagePath = "~/wwwroot/Images/no-image-news.png"; }
+                }
+                <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+                <br />
+                @Html.DisplayFor(modelItem => item.HinhAnh)
+
+            </td>
+            <td>
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaHang.Trim() }) |
+                @Html.ActionLink("Thêm vào giỏ", "", new { id = item.MaHang.Trim() })
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- Mấy cái thuộc tính PageCout và PageNumber là có sẵn trong thư viện của IPageList chỉ lấy ra dùng thôi-->
+Trang @(Model.PageCount <Model.PageNumber ? 0: Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFiter = ViewBag.CurrentFiter }))
