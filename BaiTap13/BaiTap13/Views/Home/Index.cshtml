@@ -1,0 +1,57 @@
+﻿@model PagedList.IPagedList<BaiTap13.Models.Hang>
+@using PagedList.Mvc;
+
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <!-- ASIDE -->
+        @{ Html.RenderAction("_Aside", "Home"); }
+        <!-- /ASIDE -->
+        <!-- STORE -->
+        <div id="store" class="col-md-9">
+            <!-- store products -->
+            <div class="row">
+                <!-- product -->
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+
+
+                                @{ //Lấy đường dẫn file ảnh
+                                    string ImagePath = "~/wwwroot/images/" + item.HinhAnh; }
+
+                                <img src="@Url.Content(ImagePath)" alt="" width="250" height="250" />
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@Html.DisplayFor(modelItem => item.Nha_CC.TenNCC)</p>
+                                <h3 class="product-name"><a href="@Url.Action("ChiTietSanPham", "Home", new { id=item.MaHang.Trim()} )">@Html.DisplayFor(modelItem => item.TenHang)</a></h3>
+                                <h4 class="product-price">@Html.DisplayFor(modelItem => item.Gia) VND</h4>
+                            </div>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                    </div>}
+                <!-- /product -->
+
+            </div>
+            <!-- /store products -->
+
+            <!-- store bottom filter -->
+            <div class="store-filter clearfix">
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions()
+                   {
+                       UlElementClasses = new string[] { "store-pagination" },
+                   })
+            </div>
+            <!-- /store bottom filter -->
+            
+        </div>
+        <!-- /STORE -->
+    </div>
+    <!-- /row -->
+</div>
+

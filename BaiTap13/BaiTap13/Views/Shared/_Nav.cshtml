@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<BaiTap13.Models.Nha_CC>
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="active"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li><a >Khuyến mãi</a></li>
+                <li class="@(ViewContext.ParentActionViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.ParentActionViewContext.RouteData.Values["id"] == null ? "active" : "")">
+                    <a href="@Url.Action("Index", "Home")">Sản phẩm</a>
+                </li>
+                <!-- Danh muc-->
+                @foreach (var item in Model)
+                {
+                    <li class="@(ViewContext.ParentActionViewContext.RouteData.Values["id"] != null ? ViewContext.ParentActionViewContext.RouteData.Values["id"].ToString() == item.MaNCC.Trim() ? "active" : "": "")">
+
+                        <a href="@Url.Action("Index", "Home", new { id=item.MaNCC.Trim()} )">
+                            @Html.DisplayFor(modelItem => item.TenNCC)
+                        </a>
+                    </li>
+                }
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
