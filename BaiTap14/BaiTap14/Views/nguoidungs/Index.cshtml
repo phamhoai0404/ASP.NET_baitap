@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BaiTap14.Models.nguoidung>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách người dùng</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p> *@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.hoten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.matkhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.khoa)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.hoten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matkhau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.khoa)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.manguoidung }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.manguoidung }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.manguoidung })
+                </td>*@
+        </tr>
+    }
+
+</table>
