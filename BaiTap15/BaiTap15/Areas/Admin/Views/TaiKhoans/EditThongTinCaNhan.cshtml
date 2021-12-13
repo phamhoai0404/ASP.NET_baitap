@@ -1,0 +1,90 @@
+﻿@model BaiTap15.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.HoatDong = "Sửa thông tin cá nhân";
+}
+@using (Html.BeginForm("EditThongTinCaNhan", "TaiKhoans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaQuyen)
+    @Html.HiddenFor(model => model.TinhTrang)
+    @Html.HiddenFor(model => model.MaQuyen)
+    @Html.HiddenFor(model => model.Email)
+    @Html.HiddenFor(model => model.Anh)
+    @Html.HiddenFor(model => model.MatKhau)
+    @Html.HiddenFor(model => model.MaTK)
+
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            <strong>TÊN BẢNG</strong>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group">
+                <label for="anh">Họ tên</label>
+                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="anh">Địa chỉ </label>
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="anh">Điện Thoại</label>
+                @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="anh">Ảnh</label>
+                @if (Model.Anh != "")
+                {
+
+                    <p><img id="hienThiAnh" width="100px" src="@Url.Content("~/Areas/Admin/Assets/Images/" + Model.Anh)" /></p>
+                }
+                else
+                {
+                    <p><img id="hienThiAnh" width="100px" src="~/wwwroot/WineImages/no-image-news.png" /></p>
+                }
+
+                <p><label for="loadFile" style="cursor:pointer;">Chọn file ảnh</label></p>
+                <p><input name="ImageFile" type="file" id="loadFile" style="display:none;" onchange="eventLoadFile(event)" /></p>
+
+            </div>
+
+            <a href="@Url.Action("Index","MainBoard")" class="btn btn-link" role="button"><i class="fas fa-undo mr-1"></i>Hủy bỏ</a>
+            <button class="btn btn-link" type="submit"><i class="fas fa-save mr-1"></i>Lưu</button>
+        </div>
+    </div>
+
+
+}
+
+<script>
+    var eventLoadFile = function (event) {
+
+        var file = document.getElementById("loadFile").value;
+        var ext = file.substring(file.lastIndexOf('.') + 1);
+        if (ext == "") return true;
+        if (ext == "gif" || ext == "GIF" || ext == "PNG" || ext == "png" || ext == "jpg" || ext == "JPG" || ext == "bmp" || ext == "BMP") {
+            var imagessssssss = document.getElementById('hienThiAnh');
+            imagessssssss.src = URL.createObjectURL(event.target.files[0]);
+            return true;
+        }
+        else {
+            document.getElementById("loadFile").value = null;
+            alert("Chỉ upload file ảnh!");
+            fup.focus();
+            return false;
+        }
+    };
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

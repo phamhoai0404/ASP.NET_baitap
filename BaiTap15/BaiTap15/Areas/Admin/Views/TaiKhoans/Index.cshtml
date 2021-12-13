@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BaiTap15.Models.TaiKhoan>
+
+@{
+    ViewBag.HoatDong = "Bảng thông tin Tài Khoản";
+}
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        <strong>TÊN BẢNG</strong>
+    </div>
+    <div class="card-body">
+        <div class="pull-right">
+
+        </div>
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>
+                            Ảnh
+                        </th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>Điện thoại</th>
+                        <th>Tình trạng</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @for (int i = 0; i < Model.ToList().Count; i++)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => Model.ToList()[i].MaTK)</td>
+                            <td>
+                                @{ var ImagePath = "~/Areas/Admin/Assets/Images/" + Model.ToList()[i].Anh;}
+                                <img class="rounded service-img mr-1"
+                                     src="@Url.Content(@ImagePath)"
+                                     alt="" width="50" />
+                            </td>
+                            <td> @Html.DisplayFor(modelItem => Model.ToList()[i].HoTen)</td>
+                            <td> @Html.DisplayFor(modelItem => Model.ToList()[i].Email)</td>
+                            <td> @Html.DisplayFor(modelItem => Model.ToList()[i].DiaChi)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.ToList()[i].DienThoai)</td>
+                            <td>
+                                @{ if (Model.ToList()[i].TinhTrang == true)
+                                    {
+
+                                        <input onclick="Change(@Model.ToList()[i].MaTK)" type="checkbox" checked />
+
+                                    }
+                                    else
+                                    {
+                                        <input onclick="Change(@Model.ToList()[i].MaTK)" type="checkbox" />
+                                    }
+                                }
+
+                            </td>
+                            <td>
+                                <a class="btn btn-link" role="button" href="@Url.Action("Delete","TaiKhoans",new {id = Model.ToList()[i].MaTK})"><i class="fas fa-trash mr-1"></i>Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const Change = async (id) => {
+
+        const url = `/Admin/TaiKhoans/Update?id=${id}`;
+        const formData = new FormData();
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+    }
+</script>
+

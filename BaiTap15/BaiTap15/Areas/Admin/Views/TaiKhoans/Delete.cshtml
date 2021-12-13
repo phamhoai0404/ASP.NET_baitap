@@ -1,0 +1,46 @@
+﻿@model BaiTap15.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.HoatDong = "Xóa Tài Khoản";
+}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        <strong>TÊN BẢNG</strong>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-primary" role="alert">
+            <h4>Bạn có chắc muốn xóa bản ghi này không?</h4>
+        </div>
+        <div class="form-group">
+            <label for="hoten">Họ tên</label>
+            @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+        <div class="form-group">
+            <label for="diachi">Địa chỉ</label>
+            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+        <div class="form-group">
+            <label for="dienthoai">Điện thoại</label>
+            @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+        <div class="form-group">
+            <label for="anh">Ảnh</label><br />
+            <td>
+                @{ var ImagePath = "~/Areas/Admin/Assets/Images/" + Model.Anh;}
+                <img class="rounded service-img mr-1"
+                     src="@Url.Content(@ImagePath)"
+                     alt="" width="150" />
+            </td><br /><br />
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <a href="@Url.Action("Index","TaiKhoans")" class="btn btn-link" role="button"><i class="fas fa-undo mr-1"></i>Hủy bỏ</a>
+            <button  class="btn btn-link" type="submit" ><i class="fas fa-save mr-1"></i>Xóa</button>
+        }
+    </div>
+</div>
+
+

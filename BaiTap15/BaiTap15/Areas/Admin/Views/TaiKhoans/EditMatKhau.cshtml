@@ -1,0 +1,65 @@
+﻿
+@model BaiTap15.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.HoatDong = "Sửa đổi mật khẩu";
+}
+@using (Html.BeginForm("EditMatKhau", "TaiKhoans", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaQuyen)
+    @Html.HiddenFor(model => model.TinhTrang)
+    @Html.HiddenFor(model => model.MaQuyen)
+    @Html.HiddenFor(model => model.Email)
+    @Html.HiddenFor(model => model.Anh)
+    @Html.HiddenFor(model => model.MaTK)
+    @Html.HiddenFor(model => model.HoTen)
+    @Html.HiddenFor(model => model.DiaChi)
+    @Html.HiddenFor(model => model.DienThoai)
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        <strong>TÊN BẢNG</strong>
+    </div>
+    <div class="card-body">
+
+        <div class="form-group">
+            <label for="anh"><b>Mật khẩu cũ: </b></label>
+            <input name="matkhaucu" class=" form-control" type="password"/>
+        </div>
+        <div class="form-group">
+            <label for="anh"><b>Mật khẩu mới:</b> </label>
+            <input name="matkhaumoi" class=" form-control" type="password" />
+        </div>
+        <div class="form-group">
+            <label for="anh"><b>Mật khẩu xác nhận: </b> </label>
+            <input name="matkhauxacnhan" class=" form-control" type="password" />
+        </div>
+
+
+        <a href="@Url.Action("Index","MainBoard")" class="btn btn-link" role="button"><i class="fas fa-undo mr-1"></i>Hủy bỏ</a>
+        <button class="btn btn-link" type="submit"><i class="fas fa-save mr-1"></i>Lưu</button>
+    </div>
+
+    @if (ViewBag.LoiMatKhau != null)
+    {
+        <br />
+
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.LoiMatKhau
+        </div>
+    }
+</div>
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
